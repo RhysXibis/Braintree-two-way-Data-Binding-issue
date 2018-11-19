@@ -1,0 +1,25 @@
+package rhyspartlett.com.braintreedatabindingandroidx
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
+import rhyspartlett.com.braintreedatabindingandroidx.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainActivityViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        viewModel = ViewModelProviders.of(this)[MainActivityViewModel::class.java]
+
+        binding.viewModel = viewModel
+
+        binding.setLifecycleOwner(this)
+    }
+}
