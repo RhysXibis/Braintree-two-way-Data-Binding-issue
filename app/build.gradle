@@ -41,5 +41,17 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     //Braintree drop in UI
-    implementation 'com.braintreepayments.api:drop-in:3.7.1'
+    implementation('com.braintreepayments.api:drop-in:3.7.1') {
+      // The Visa Checkout SDK depends on data binding which
+      // currenly does not play well with 2-way data binding.
+      //
+      // The issue has been fixed on Google's side and we
+      // will see the fix in Gradle Build Tools 3.3
+      // https://issuetracker.google.com/issues/116361870
+      //
+      // In the meantime you can exclude the visa-checkout
+      // module so that data binding is not present in
+      // Drop-in.
+      exclude module: 'visa-checkout'
+    }
 }
